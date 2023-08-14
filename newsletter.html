@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des emails des utilisateurs inscrits à la newsletter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            background-color: white;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        li div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button, a {
+            background-color: #db6334;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        a {
+            background-color: #2ecc71;
+            text-decoration: none;
+        }
+
+        @media screen and (max-width: 300px) {
+            li {
+                flex-direction: row;
+                align-items: center;
+                width: 100%;
+
+            }
+
+            button, a {
+                margin-left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des emails inscrits à la newsletter</h1>
+    <ul id="emailList"></ul>
+
+    <script>
+        var emailList = JSON.parse(localStorage.getItem('emailList')) || [];
+
+        function updateEmailList() {
+            var emailListHtml = emailList.map(function(email) {
+                return '<li><div>' + email + '<button onclick="deleteEmail(\'' + email + '\')">Supprimer</button><a href="mailto:' + email + '">Contacter</a></div></li>';
+            }).join('');
+
+            document.getElementById('emailList').innerHTML = emailListHtml;
+        }
+
+        function deleteEmail(email) {
+            var index = emailList.indexOf(email);
+            if (index !== -1) {
+                emailList.splice(index, 1);
+                localStorage.setItem('emailList', JSON.stringify(emailList));
+                updateEmailList();
+            }
+        }
+
+        updateEmailList();
+    </script>
+</body>
+</html>

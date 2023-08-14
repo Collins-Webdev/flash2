@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La liste des demandes de services et leurs détails</title>
+</head>
+<body>
+    <h1>Liste des demandes de services</h1>
+    <table id="jobTable">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Tél</th>
+                <th>Service Désiré</th>
+                <th>Type de travaux</th>
+                <th>Budget</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Les données seront ajoutées ici -->
+        </tbody>
+    </table>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const jobTable = document.getElementById("jobTable");
+    
+            // Retrieve jobList from localStorage
+            const jobList = JSON.parse(localStorage.getItem("jobList")) || [];
+    
+            // Populate the jobTable with data from jobList
+            jobList.forEach(function(data) {
+                const newRow = jobTable.insertRow();
+                newRow.insertCell().textContent = data.name;
+                newRow.insertCell().textContent = data.email;
+                newRow.insertCell().textContent = data.phone;
+                newRow.insertCell().textContent = data.service;
+                newRow.insertCell().textContent = data.typeOfWork;
+                newRow.insertCell().textContent = data.budget;
+                newRow.insertCell().textContent = data.message;
+            });
+        });
+    </script>
+    
+
+
+
+
+</body>
+</html>

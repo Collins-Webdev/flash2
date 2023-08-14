@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identifiez-vous</title>
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+    
+        form {
+            text-align: center;
+        }
+    
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    
+        #message {
+            margin-top: 10px;
+        }
+    
+        #buttons {
+            display: none;
+            margin-top: 20px;
+        }
+    
+        button {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            padding: 10px;
+            margin: 10px auto;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    
+
+    
+</head>
+<body>
+    <form>
+        <label for="password">Mot de Passe</label>
+        <input type="password" id="password" placeholder="Entrez le mot de passe">
+        <label for="cnfrm-password">Confirmez le mot de passe</label>
+        <input type="password" id="cnfrm-password" placeholder="Confirmez le mot de passe">
+        <p id="message"></p>
+        <input type="button" onclick="checkPassword()" value="CONNEXION"/>
+    </form>
+
+    <div id="buttons" style="display: none;">
+        <button onclick="goToNewsletter()">Voir la liste de newsletter</button>
+        <button onclick="goToServices()">Voir les demandes de services</button>
+        <button onclick="goToContactForm()">Voir les messages du formulaire de contact</button>
+    </div>
+
+    <script>
+        function checkPassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("cnfrm-password").value;
+            let message = document.getElementById("message");
+
+            var defaultPassword = 'Fl@sh014!Klins'; // Mot de passe par défaut
+
+            if (password.length != 0) {
+                if (password === defaultPassword && confirmPassword === defaultPassword) {
+                    message.textContent = "";
+                    document.getElementById("buttons").style.display = "block";
+                } else {
+                    message.textContent = "Les mots de passe ne correspondent pas";
+                    message.style.backgroundColor = "#ff4d4d";
+                    message.style.padding = "10px";
+                    document.getElementById("buttons").style.display = "none";
+                }
+            } else {
+                alert("Veuillez renseigner tous les champs!");
+                message.textContent = "";
+                document.getElementById("buttons").style.display = "none";
+            }
+        }
+
+        function goToNewsletter() {
+            window.location.href = "../newsletter.html";
+        }
+
+        function goToServices() {
+            window.location.href = "../service.html";
+        }
+
+        function goToContactForm() {
+            window.location.href = "../formulaire.html";
+        }
+    </script>
+</body>
+</html>
